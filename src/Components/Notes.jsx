@@ -40,7 +40,7 @@ export default function Notes(props) {
   const handleAddTask = async () => {
     const title = task.current.value;
     setLoading(true);
-    await axios.post("http://localhost:3001/addTasks", {
+    await axios.post(`${import.meta.env.VITE_HOST_NAME}/addTasks`, {
       taskName: title,
       folderId: location.state.id,
     });
