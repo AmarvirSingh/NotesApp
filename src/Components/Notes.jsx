@@ -25,7 +25,7 @@ export default function Notes(props) {
   const fecthTasks = async () => {
     setLoading(true);
     const taskData = await axios.post(
-      "http://localhost:3001/addTasks/getTasks",
+      `${import.meta.env.VITE_HOST_NAME}/addTasks/getTasks`,
       { folderId: location.state.id }
     );
     const newArray = taskData.data.tasks;

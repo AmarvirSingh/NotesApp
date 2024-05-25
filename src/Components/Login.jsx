@@ -35,10 +35,13 @@ export default function Login() {
       return alert("UserName and Password cAnnot be empty !!!");
     }
 
-    const data = await axios.post("http://localhost:3001/auth/login", {
-      username: user,
-      password: pass,
-    });
+    const data = await axios.post(
+      `${import.meta.env.VITE_HOST_NAME}/auth/login`,
+      {
+        username: user,
+        password: pass,
+      }
+    );
 
     if (data.status === 201) {
       setErrorMessage(true);

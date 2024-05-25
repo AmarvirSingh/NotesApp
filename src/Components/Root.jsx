@@ -20,7 +20,7 @@ export default function Root() {
     setLoading(true);
     const userId = window.localStorage.getItem("userId");
     const newdata = await axios.post(
-      "http://localhost:3001/addFolder/getAllFolders",
+      `${import.meta.env.VITE_HOST_NAME}/addFolder/getAllFolders`,
       {
         userId: userId,
       }

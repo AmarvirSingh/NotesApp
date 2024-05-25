@@ -20,7 +20,7 @@ export default function FolderModal({
     const name = folderName.current.value;
     const userId = window.localStorage.getItem("userId");
 
-    await axios.post("http://localhost:3001/addFolder/", {
+    await axios.post(`${import.meta.env.VITE_HOST_NAME}/addFolder/`, {
       folderName: name,
       userId: userId,
     });

@@ -32,10 +32,13 @@ export default function Signup() {
     }
 
     try {
-      const response = await axios.post("http://localhost:3001/auth/register", {
-        username: user,
-        password: pass,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_HOST_NAME}/auth/register`,
+        {
+          username: user,
+          password: pass,
+        }
+      );
       console.log(response);
       if (response.status === 200) {
         setIsLogin(true);
