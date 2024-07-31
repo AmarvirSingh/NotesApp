@@ -13,6 +13,7 @@ export default function Login() {
     useContext(AppContext);
   const [errorMessage, setErrorMessage] = useState(false);
   const [Message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const username = useRef();
   const password = useRef();
@@ -28,6 +29,7 @@ export default function Login() {
   }, []);
 
   const handleLogin = async () => {
+    setLoading(true);
     const user = username.current.value;
     const pass = password.current.value;
 
@@ -46,12 +48,14 @@ export default function Login() {
     if (data.status === 201) {
       setErrorMessage(true);
       setMessage("Password doesnot match the records");
+      setLoading(false);
       return;
     }
 
     if (data.status === 203) {
       setErrorMessage(true);
       setMessage("User Doesnot Exist");
+      setLoading(false);
       return;
     }
     //console.log(data);
@@ -61,6 +65,7 @@ export default function Login() {
       setIsLogin(true);
       setUsername(data.data.username);
       setUserId(data.data.userId);
+      setLoading(false);
 
       window.localStorage.setItem("user", `${data.data.username}`);
       window.localStorage.setItem("userId", `${data.data.userId}`);
@@ -105,7 +110,7 @@ export default function Login() {
           </div>
           <div className="text-center mb-2">
             <button onClick={() => handleLogin()} className="btn btn-primary">
-              Sign IN
+              Sign IN {loading && <LoadingSpinner />}
             </button>
           </div>
           <div className="text-center mb-2">
@@ -119,5 +124,13 @@ export default function Login() {
         </div>
       )}
     </>
+  );
+}
+
+function LoadingSpinner() {
+  return (
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   );
 }
