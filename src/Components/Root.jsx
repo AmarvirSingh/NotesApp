@@ -64,7 +64,7 @@ export default function Root() {
           setUpdateFolder={setUpdateFolder}
         />
       )}
-      {!showModal && data.length > 0 ? (
+      {!showModal & (data.length() > 0) ? (
         data.map((d, id) => <FolderUI key={id} folder={d} />)
       ) : (
         <p>No Folder right now </p>
