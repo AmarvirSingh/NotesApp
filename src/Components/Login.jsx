@@ -129,7 +129,7 @@ export default function Login() {
 
 function LoadingSpinner() {
   return (
-    <div class="spinner-border" role="status">
+    <div class="spinner-border spinner-border-sm" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
   );

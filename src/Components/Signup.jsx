@@ -14,6 +14,7 @@ export default function Signup() {
   const navigate = useNavigate();
   const { setUsername, setIsLogin, setUserId, isLogin } =
     useContext(AppContext);
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(false);
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function Signup() {
   }, []);
 
   const handleRegister = async () => {
+    setLoading(true);
     const user = username.current.value;
     const pass = password.current.value;
 
@@ -47,6 +49,7 @@ export default function Signup() {
 
         window.localStorage.setItem("user", `${response.data.username}`);
         window.localStorage.setItem("userId", `${response.data.user}`);
+        setLoading(false);
         navigate("/folder");
       }
     } catch (err) {
@@ -85,7 +88,7 @@ export default function Signup() {
         </div>
         <div className="text-center mb-2">
           <button onClick={() => handleRegister()} className="btn btn-primary">
-            Signup
+            Signup {loading && <LoadingSpinner />}
           </button>
         </div>
         <div className="text-center mb-2">
@@ -98,5 +101,13 @@ export default function Signup() {
         </div>
       </div>
     </>
+  );
+}
+
+function LoadingSpinner() {
+  return (
+    <div class="spinner-border spinner-border-sm" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   );
 }
