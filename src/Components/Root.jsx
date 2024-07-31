@@ -54,7 +54,7 @@ export default function Root() {
         setShowModal={setShowModal}
         showAdd={true}
       />
-      {loading && <LoadingLine />}
+      {loading && <LoadingSpinner />}
 
       {showModal && (
         <FolderModal
@@ -64,7 +64,19 @@ export default function Root() {
           setUpdateFolder={setUpdateFolder}
         />
       )}
-      {!showModal && data.map((d, id) => <FolderUI key={id} folder={d} />)}
+      {!showModal && data.length > 0 ? (
+        data.map((d, id) => <FolderUI key={id} folder={d} />)
+      ) : (
+        <p>No Folder right now </p>
+      )}
     </>
+  );
+}
+
+function LoadingSpinner() {
+  return (
+    <div class="spinner-border spinner-border-sm" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
   );
 }
