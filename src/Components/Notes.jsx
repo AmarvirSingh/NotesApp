@@ -51,7 +51,7 @@ export default function Notes(props) {
 
   const handleDone = async (index) => {
     setLoading(true);
-    const response = await axios.post("http://localhost:3001/addTasks/delete", {
+    const response = await axios.post(`${import.meta.env.VITE_HOST_NAME}/addTasks/delete`, {
       noteId: index,
     });
     if (response.status === 201) {
